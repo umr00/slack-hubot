@@ -1,0 +1,86 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: md5WithRSAEncryption
+        Issuer: C=JP, ST=Nara, L=Ikoma, O=Nara Institute of Science and Technology, OU=NAIST Root CA
+        Validity
+            Not Before: Feb  8 14:43:06 2005 GMT
+            Not After : Feb  8 14:43:06 2035 GMT
+        Subject: C=JP, ST=Nara, L=Ikoma, O=Nara Institute of Science and Technology, OU=NAIST Server CA
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:e1:69:fb:e8:5c:f9:1a:a3:58:7a:5c:42:32:9d:
+                    7c:1f:ff:34:e5:3a:69:43:a6:5c:f8:33:44:c7:11:
+                    ed:86:a5:2a:0a:c3:c5:d1:fb:9a:7a:40:f7:db:50:
+                    cd:6c:89:53:a9:f7:a2:81:af:15:85:4d:8b:da:7c:
+                    5d:82:02:3e:87:7a:b0:7a:d9:37:09:4d:50:31:65:
+                    ee:4c:6b:a5:52:26:f1:55:ca:2d:59:cb:c5:cb:1e:
+                    f1:86:6e:f1:98:66:60:14:8a:bb:10:b9:f6:04:68:
+                    c2:c2:3b:3e:1c:3a:e2:da:1c:d0:72:fc:30:09:8e:
+                    9f:25:c9:61:6c:ad:81:ae:12:72:ad:5f:c0:3d:0a:
+                    07:27:32:94:fe:76:4e:42:ae:45:71:42:00:20:4e:
+                    94:5b:b3:b9:a8:5e:cd:b8:a3:54:03:02:37:85:cc:
+                    e7:56:59:99:44:6e:13:c7:d5:08:25:02:88:6a:64:
+                    64:17:27:9c:81:ad:39:c2:c3:91:a8:fc:55:8d:da:
+                    4b:90:c8:ea:16:94:a8:4b:94:48:a2:3e:2c:ce:3f:
+                    ce:ef:fa:f2:ef:5c:70:9e:11:0f:b7:72:cf:64:7d:
+                    5e:6c:0f:7f:08:45:07:f0:25:f0:e8:af:d8:85:35:
+                    59:14:1e:af:29:81:f4:3f:1e:7d:86:68:05:43:4d:
+                    50:5f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                C9:92:41:1D:2A:31:AF:E5:A0:FD:52:B6:1E:5A:EE:6D:D1:8B:47:08
+            X509v3 Authority Key Identifier: 
+                keyid:91:0D:48:29:9F:5A:B2:DF:64:0D:9A:67:8A:1E:A1:B1:AA:B4:90:6A
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+            X509v3 Key Usage: 
+                Certificate Sign, CRL Sign
+            X509v3 CRL Distribution Points: 
+                URI:http://ca.naist.jp/root.crl
+
+    Signature Algorithm: md5WithRSAEncryption
+        07:c2:eb:b8:b2:92:39:05:40:26:7a:85:da:b7:85:37:c5:b7:
+        a4:24:7f:a1:bf:9f:c0:af:34:d0:9d:f7:02:81:fd:3c:e5:34:
+        cc:13:47:d3:62:75:63:d5:30:25:e6:9e:11:b8:c9:c5:2b:02:
+        bd:7b:2e:b3:55:ae:71:d1:e9:4a:e8:fb:12:43:0a:52:35:3a:
+        d7:d4:4b:2d:b7:f0:4d:c5:08:f8:ba:1a:df:dc:0e:85:f5:e5:
+        17:fc:8f:c7:bd:12:24:4b:b0:75:e4:3d:65:08:fb:e4:30:15:
+        3e:6e:a6:d5:e4:ce:60:e9:6a:52:ff:ce:3c:af:98:b3:1e:02:
+        d6:e8:2c:2b:0e:bc:db:68:b8:a3:8b:1a:d2:97:d6:c6:45:8b:
+        92:0c:70:60:96:93:c6:9a:ad:14:83:8c:c4:31:a8:9c:36:7d:
+        a8:50:59:c1:a4:cc:30:c6:a0:79:fe:8e:4a:02:fb:67:b6:4b:
+        ad:2f:a9:81:3b:a0:5e:88:d3:6f:0b:51:5d:39:10:c9:b4:6d:
+        50:16:78:ba:1d:50:9d:1a:2c:6d:6f:50:b2:a3:7c:64:6d:57:
+        80:8c:82:a2:9f:77:bc:c3:0b:7b:06:89:9c:12:8d:7f:69:03:
+        80:4c:17:36:cd:6e:f9:bb:a9:31:2e:cf:f3:42:58:57:63:10:
+        ef:04:8e:4f
+-----BEGIN CERTIFICATE-----
+MIID+DCCAuCgAwIBAgIBATANBgkqhkiG9w0BAQQFADB3MQswCQYDVQQGEwJKUDEN
+MAsGA1UECBMETmFyYTEOMAwGA1UEBxMFSWtvbWExMTAvBgNVBAoTKE5hcmEgSW5z
+dGl0dXRlIG9mIFNjaWVuY2UgYW5kIFRlY2hub2xvZ3kxFjAUBgNVBAsTDU5BSVNU
+IFJvb3QgQ0EwHhcNMDUwMjA4MTQ0MzA2WhcNMzUwMjA4MTQ0MzA2WjB5MQswCQYD
+VQQGEwJKUDENMAsGA1UECBMETmFyYTEOMAwGA1UEBxMFSWtvbWExMTAvBgNVBAoT
+KE5hcmEgSW5zdGl0dXRlIG9mIFNjaWVuY2UgYW5kIFRlY2hub2xvZ3kxGDAWBgNV
+BAsTD05BSVNUIFNlcnZlciBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC
+ggEBAOFp++hc+RqjWHpcQjKdfB//NOU6aUOmXPgzRMcR7YalKgrDxdH7mnpA99tQ
+zWyJU6n3ooGvFYVNi9p8XYICPod6sHrZNwlNUDFl7kxrpVIm8VXKLVnLxcse8YZu
+8ZhmYBSKuxC59gRowsI7Phw64toc0HL8MAmOnyXJYWytga4Scq1fwD0KBycylP52
+TkKuRXFCACBOlFuzuahezbijVAMCN4XM51ZZmURuE8fVCCUCiGpkZBcnnIGtOcLD
+kaj8VY3aS5DI6haUqEuUSKI+LM4/zu/68u9ccJ4RD7dyz2R9XmwPfwhFB/Al8Oiv
+2IU1WRQerymB9D8efYZoBUNNUF8CAwEAAaOBjDCBiTAdBgNVHQ4EFgQUyZJBHSox
+r+Wg/VK2HlrubdGLRwgwHwYDVR0jBBgwFoAUkQ1IKZ9ast9kDZpnih6hsaq0kGow
+DAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAQYwLAYDVR0fBCUwIzAhoB+gHYYbaHR0
+cDovL2NhLm5haXN0LmpwL3Jvb3QuY3JsMA0GCSqGSIb3DQEBBAUAA4IBAQAHwuu4
+spI5BUAmeoXat4U3xbekJH+hv5/ArzTQnfcCgf085TTME0fTYnVj1TAl5p4RuMnF
+KwK9ey6zVa5x0elK6PsSQwpSNTrX1Estt/BNxQj4uhrf3A6F9eUX/I/HvRIkS7B1
+5D1lCPvkMBU+bqbV5M5g6WpS/848r5izHgLW6CwrDrzbaLijixrSl9bGRYuSDHBg
+lpPGmq0Ug4zEMaicNn2oUFnBpMwwxqB5/o5KAvtntkutL6mBO6BeiNNvC1FdORDJ
+tG1QFni6HVCdGixtb1Cyo3xkbVeAjIKin3e8wwt7BomcEo1/aQOATBc2zW75u6kx
+Ls/zQlhXYxDvBI5P
+-----END CERTIFICATE-----
