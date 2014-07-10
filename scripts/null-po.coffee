@@ -1,6 +1,6 @@
 module.exports = (robot) ->
-robot.hear /ぬるぽ/, (msg) ->
-  msg.send '''
+  robot.hear /ぬるぽ/, (msg) ->
+    msg.send '''
  
    Λ＿Λ    ＼＼
   （ ・∀・）   | | ｶﾞｯ
@@ -10,3 +10,4 @@ robot.hear /ぬるぽ/, (msg) ->
  ＿/し' ／／  Ｖ｀Д´）/
  （＿フ彡            / ←>>1
 '''
+
