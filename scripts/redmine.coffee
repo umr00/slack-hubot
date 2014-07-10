@@ -377,7 +377,7 @@ class Redmine
       "path"   : "#{pathname}#{path}"
       "method" : method
       "headers": headers
-      "cert"   : fs.readFileSync('../naist_server_ca.crt')
+      #"cert"   : fs.readFileSync("../naist_server_ca.crt")
 
     if method in ["POST", "PUT"]
       if typeof(body) isnt "string"
