@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   くそねむ - Get to sleep
+#   くそねみ - Get to sleep
 
 module.exports = (robot) ->
   robot.hear /くそねみ/i, (msg) ->
