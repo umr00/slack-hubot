@@ -8,9 +8,27 @@
 #   None
 #
 # Commands:
-#   zoi * - Receive zoi
+#   zoi <name> - Receive zoi
+#   zoi help - Show all zoi
+#   sdbot zoi add <key> <value> - Add to zoi
+#   sdbot zoi remove <key> - Remove from zoi
+
+helpers = require('coffee-script/lib/coffee-script/helpers')
+{ZoiBrain} = require('./image-brain')
 
 module.exports = (robot) ->
+  brain = new ZoiBrain(robot)
+
+  robot.respond /add zoi (\S*) ((.*)|http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*))?/i, (msg) ->
+    key = msg.match[1]
+    brain.add(msg.match[1], msg.match[2])
+    msg.send "Add #{key} to zoi"
+
+  robot.respond /remove zoi (\S*)/i, (msg) ->
+    key = msg.match[1]
+    brain.remove(msg.match[1])
+    msg.send "Remove #{key} from zoi"
+
   robot.hear /^zoi (.*)/i, (msg) ->
     name = msg.match[1]
     zois = {
@@ -33,6 +51,9 @@ module.exports = (robot) ->
       '土下座':'http://anfield.blog.ocn.ne.jp/gorimuchu/images/2014/03/21/new_game_01_p011_2.jpg'
       'がんばれた':'https://pbs.twimg.com/media/B48WE_XIIAAqDls.jpg'
     }
+
+    brainDict = brain.get()
+    zois = helpers.merge(zois, brainDict)
 
     help = createHelp(zois)
 
