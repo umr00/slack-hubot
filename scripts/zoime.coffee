@@ -34,10 +34,7 @@ module.exports = (robot) ->
       'がんばれた':'https://pbs.twimg.com/media/B48WE_XIIAAqDls.jpg'
     }
 
-    help = ""
-    for k,v of zois
-      help += k + "\n"
-    help = help.substring(0, help.length - 1);
+    help = createHelp(zois)
 
     if name == "help"
       msg.send "#{help}"
@@ -47,3 +44,12 @@ module.exports = (robot) ->
         msg.send "#{result}"
       else
         msg.send "#{name}はないぞい"
+
+createHelp = (dict) ->
+  keys = Object.keys(dict)
+  keys.sort()
+  help = ""
+  for k in keys
+    help += k + "\n"
+  help = help.substring(0, help.length - 1)
+  help

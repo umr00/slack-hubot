@@ -135,12 +135,7 @@ module.exports = (robot) ->
       ]
     }
 
-    keys = Object.keys(dict)
-    keys.sort()
-    help = ""
-    for k in keys
-      help += k + "\n"
-    help = help.substring(0, help.length - 1)
+    help = createHelp(dict)
 
     if message == "help"
       msg.send "#{help}"
@@ -156,6 +151,15 @@ module.exports = (robot) ->
       resultList = gacha(null_dict, num, msg)
       for result in resultList
         msg.send "#{result}?#{new Date().getTime()}"
+
+createHelp = (dict) ->
+  keys = Object.keys(dict)
+  keys.sort()
+  help = ""
+  for k in keys
+    help += k + "\n"
+  help = help.substring(0, help.length - 1)
+  help
 
 gacha = (dict, num, msg) ->
   keys = Object.keys(dict)
