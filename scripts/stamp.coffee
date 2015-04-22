@@ -9,8 +9,25 @@
 #
 # Commands:
 #   stamp <name> - Show stamp
+#   sdbot stamp add <key> <value> - Add to stamp
+#   sdbot stamp remove <key> - Remove from stamp
+
+helpers = require('coffee-script/lib/coffee-script/helpers')
+{StampBrain} = require('./image-brain')
 
 module.exports = (robot) ->
+  brain = new StampBrain(robot)
+
+  robot.respond /add stamp (\S*) ((.*)|http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*))?/i, (msg) ->
+    key = msg.match[1]
+    brain.add(msg.match[1], msg.match[2])
+    msg.send "Add #{key} to stamp"
+
+  robot.respond /remove stamp (\S*)/i, (msg) ->
+    key = msg.match[1]
+    brain.remove(msg.match[1])
+    msg.send "Remove #{key} from stamp"
+
   robot.hear /^stamp (.*)/i, (msg) ->
     message = msg.match[1]
 
@@ -134,6 +151,9 @@ module.exports = (robot) ->
         'http://i.imgur.com/vexZQy8.jpg'
       ]
     }
+
+    brainDict = brain.get()
+    dict = helpers.merge(dict, brainDict)
 
     help = createHelp(dict)
 
