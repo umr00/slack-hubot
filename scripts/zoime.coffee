@@ -10,8 +10,8 @@
 # Commands:
 #   zoi <name> - Receive zoi
 #   zoi help - Show all zoi
-#   sdbot zoi add <key> <value> - Add to zoi
-#   sdbot zoi remove <key> - Remove from zoi
+#   sdbot add zoi <key> <value> - Add to zoi
+#   sdbot remove zoi <key> - Remove from zoi
 
 helpers = require('coffee-script/lib/coffee-script/helpers')
 {ZoiBrain} = require('./image-brain')

@@ -9,8 +9,8 @@
 #
 # Commands:
 #   stamp <name> - Show stamp
-#   sdbot stamp add <key> <value> - Add to stamp
-#   sdbot stamp remove <key> - Remove from stamp
+#   sdbot add stamp <key> <value> - Add to stamp
+#   sdbot remove stamp <key> - Remove from stamp
 
 helpers = require('coffee-script/lib/coffee-script/helpers')
 {StampBrain} = require('./image-brain')
