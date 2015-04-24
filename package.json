@@ -22,7 +22,8 @@
     "hubot-slack": "^3.3.0",
     "hubot-youtube": "^0.1.2",
     "hubot-cron": "0.2.9",
-    "coffee-script": "~1.7.1"
+    "coffee-script": "~1.7.1",
+    "validator": "^3.39.0"
   },
   "engines": {
     "node": "0.10.x"
