@@ -13,15 +13,19 @@
 #   sdbot remove stamp <key> - Remove from stamp
 
 helpers = require('coffee-script/lib/coffee-script/helpers')
+validator = require('validator')
 {StampBrain} = require('./image-brain')
 
 module.exports = (robot) ->
   brain = new StampBrain(robot)
 
-  robot.respond /add stamp (\S*) ((.*)|http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*))?/i, (msg) ->
-    key = msg.match[1]
-    brain.add(msg.match[1], msg.match[2])
-    msg.send "Add #{key} to stamp"
+  robot.respond /add stamp\s+(\S+)\s+(https?:\/\/.+)/i, (msg) ->
+    if validator.isURL(msg.match[2])
+        key = msg.match[1]
+        brain.add(msg.match[1], msg.match[2])
+        msg.send "Add #{key} to stamp"
+    else
+        msg.send "#{msg.match[2]} is not a valid URL"
 
   robot.respond /remove stamp (\S*)/i, (msg) ->
     key = msg.match[1]
