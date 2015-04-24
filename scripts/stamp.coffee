@@ -18,7 +18,7 @@ helpers = require('coffee-script/lib/coffee-script/helpers')
 module.exports = (robot) ->
   brain = new StampBrain(robot)
 
-  robot.respond /add stamp(\S+) ((.*)|http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*))?/i, (msg) ->
+  robot.respond /add stamp (\S*) ((.*)|http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*))?/i, (msg) ->
     key = msg.match[1]
     brain.add(msg.match[1], msg.match[2])
     msg.send "Add #{key} to stamp"
