@@ -21,13 +21,13 @@ module.exports = (robot) ->
 
   robot.respond /add stamp\s+(\S+)\s+(https?:\/\/.+)/i, (msg) ->
     if validator.isURL(msg.match[2])
-        key = msg.match[1]
-        brain.add(msg.match[1], msg.match[2])
-        msg.send "Add #{key} to stamp"
+      key = msg.match[1]
+      brain.add(msg.match[1], msg.match[2])
+      msg.send "Add #{key} to stamp"
     else
-        msg.send "#{msg.match[2]} is not a valid URL"
+      msg.send "#{msg.match[2]} is not a valid URL"
 
-  robot.respond /remove stamp (\S*)/i, (msg) ->
+  robot.respond /remove stamp (\S+)/i, (msg) ->
     key = msg.match[1]
     brain.remove(msg.match[1])
     msg.send "Remove #{key} from stamp"
