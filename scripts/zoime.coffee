@@ -14,17 +14,21 @@
 #   sdbot remove zoi <key> - Remove from zoi
 
 helpers = require('coffee-script/lib/coffee-script/helpers')
+validator = require('validator')
 {ZoiBrain} = require('./image-brain')
 
 module.exports = (robot) ->
   brain = new ZoiBrain(robot)
 
-  robot.respond /add zoi (\S*) ((.*)|http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*))?/i, (msg) ->
-    key = msg.match[1]
-    brain.add(msg.match[1], msg.match[2])
-    msg.send "Add #{key} to zoi"
+  robot.respond /add zoi\s+(\S+)\s+(https?:\/\/.+)/i, (msg) ->
+    if validator.isURL(msg.match[2])
+      key = msg.match[1]
+      brain.add(msg.match[1], msg.match[2])
+      msg.send "Add #{key} to zoi"
+    else
+      msg.send "#{msg.match[2]} is not a valid URL"
 
-  robot.respond /remove zoi (\S*)/i, (msg) ->
+  robot.respond /remove zoi (\S+)/i, (msg) ->
     key = msg.match[1]
     brain.remove(msg.match[1])
     msg.send "Remove #{key} from zoi"
