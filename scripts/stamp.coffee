@@ -15,9 +15,11 @@
 helpers = require('coffee-script/lib/coffee-script/helpers')
 validator = require('validator')
 {StampBrain} = require('./image-brain')
+DeleteBrain = require('./delete-brain')
 
 module.exports = (robot) ->
   brain = new StampBrain(robot)
+  delete_brain = new DeleteBrain(robot)
 
   robot.respond /add stamp\s+(\S+)\s+(https?:\/\/.+)/i, (msg) ->
     if validator.isURL(msg.match[2])
@@ -160,12 +162,13 @@ module.exports = (robot) ->
     dict = helpers.merge(dict, brainDict)
 
     help = createHelp(dict)
+    time = new Date().getTime()
 
     if message == "help"
       msg.send "#{help}"
     else if dict[message]?
       result = dict[message]
-      msg.send "#{result}?#{new Date().getTime()}"
+      msg.send "#{result}?#{time}"
     else if msg.message.room == "talk-with-image"
       num = 1
       if isFinite(message)
@@ -174,7 +177,12 @@ module.exports = (robot) ->
         num = Math.max(1, num)
       resultList = gacha(null_dict, num, msg)
       for result in resultList
-        msg.send "#{result}?#{new Date().getTime()}"
+        channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
+        robot.adapter.client._apiCall 'chat.postMessage',
+          channel: channel
+          text: "#{result}?#{time}"
+          as_user: true
+        , (res) -> delete_brain.add(time, channel, res.ts)
 
 createHelp = (dict) ->
   keys = Object.keys(dict)
