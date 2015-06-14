@@ -29,5 +29,5 @@ module.exports = (robot) ->
 		result = ""
 		for key, value of brain.get()
 			for message in value
-				result += message.ts + " : " + message.ch + "\n"
+				result += message.ts + " : " + message.ch + " : " + message.iv + "\n"
 		msg.send result
