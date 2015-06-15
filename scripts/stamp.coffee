@@ -15,11 +15,10 @@
 helpers = require('coffee-script/lib/coffee-script/helpers')
 validator = require('validator')
 {StampBrain} = require('./image-brain')
-DeleteBrain = require('./delete-brain')
+AutoDeleteMessage = require('./auto-delete-post')
 
 module.exports = (robot) ->
   brain = new StampBrain(robot)
-  delete_brain = new DeleteBrain(robot)
 
   robot.respond /add stamp\s+(\S+)\s+(https?:\/\/.+)/i, (msg) ->
     if validator.isURL(msg.match[2])
@@ -162,13 +161,14 @@ module.exports = (robot) ->
     dict = helpers.merge(dict, brainDict)
 
     help = createHelp(dict)
+    channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
     time = new Date().getTime()
 
     if message == "help"
-      msg.send "#{help}"
+      new AutoDeleteMessage(robot, channel).post_with_day("#{help}", time, 1)
     else if dict[message]?
       result = dict[message]
-      msg.send "#{result}?#{time}"
+      new AutoDeleteMessage(robot, channel).post_with_day("#{result}?#{time}", time, 1)
     else if msg.message.room == "talk-with-image"
       num = 1
       if isFinite(message)
@@ -177,12 +177,7 @@ module.exports = (robot) ->
         num = Math.max(1, num)
       resultList = gacha(null_dict, num, msg)
       for result in resultList
-        channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
-        robot.adapter.client._apiCall 'chat.postMessage',
-          channel: channel
-          text: "#{result}?#{time}"
-          as_user: true
-        , (res) -> delete_brain.add(time, channel, res.ts)
+        new AutoDeleteMessage(robot, channel).post_with_hour("#{result}?#{time}", time, 2)
 
 createHelp = (dict) ->
   keys = Object.keys(dict)

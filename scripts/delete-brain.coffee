@@ -19,13 +19,18 @@ class DeleteBrain
   get: ->
     @storage.messages
 
-  add: (time, channel, timestamp) ->
+  add: (time, channel, timestamp, delete_interval) ->
     data = {
       ts : timestamp
       ch : channel
+      iv : delete_interval
     }
     @storage.messages[time] ||= []
     @storage.messages[time].push(data)
+    @robot.brain.save()
+
+  update: (key, messages) ->
+    @storage.messages[key] = messages
     @robot.brain.save()
 
   remove: (time) ->

@@ -16,6 +16,7 @@
 helpers = require('coffee-script/lib/coffee-script/helpers')
 validator = require('validator')
 {ZoiBrain} = require('./image-brain')
+AutoDeleteMessage = require('./auto-delete-post')
 
 module.exports = (robot) ->
   brain = new ZoiBrain(robot)
@@ -60,15 +61,17 @@ module.exports = (robot) ->
     zois = helpers.merge(zois, brainDict)
 
     help = createHelp(zois)
+    channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
+    time = new Date().getTime()
 
     if name == "help"
-      msg.send "#{help}"
+      new AutoDeleteMessage(robot, channel).post_with_day("#{help}", time, 1)
     else
       result = zois[name]
       if result
-        msg.send "#{result}"
+        new AutoDeleteMessage(robot, channel).post_with_day("#{result}", time, 1)
       else
-        msg.send "#{name}はないぞい"
+        new AutoDeleteMessage(robot, channel).post_with_day("#{name}はないぞい", time, 1)
 
 createHelp = (dict) ->
   keys = Object.keys(dict)
