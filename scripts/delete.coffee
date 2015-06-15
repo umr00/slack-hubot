@@ -15,3 +15,10 @@ module.exports = (robot) ->
 							ts: message.ts
 						, (res) -> null
 					brain.remove(key)
+
+	robot.respond /delete list/i, (msg) ->
+		result = ""
+		for key, value of brain.get()
+			for message in value
+				result += message.ts + " : " + message.ch + "\n"
+		msg.send result
