@@ -9,6 +9,11 @@
 #
 # Commands:
 #   bus <destination> <count> - Show next <count> time
+fs = require 'fs'
+path = require 'path'
+
+file = path.join(process.cwd(), 'time_table.json')
+dia = JSON.parse(fs.readFileSync(file, 'utf8'))
 
 module.exports = (robot) ->
   robot.hear /^bus (\w+)( (\d+))?/i, (msg) ->
@@ -34,11 +39,8 @@ nextBus = (dest, count, msg) ->
   str = ""
   while count > num
     break if hour > 23
-    if dict[hour]?
-      list = []
-      for key in keysFromDestination(dest)
-        list = list.concat dict[hour][key]
-      list.sort()
+    if dia[dest][hour]?
+      list = dia[dest][hour]
       for time in list
         break if num >= count
         if time > min
