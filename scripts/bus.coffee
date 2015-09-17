@@ -28,19 +28,22 @@ module.exports = (robot) ->
 
 nextBus = (dest, count, msg) ->
   count = parseInt(count, 10) || 3
-  count = Math.min(5, count)
   count = Math.max(1, count)
   current = new Date()
   hour = current.getHours()
   min = current.getMinutes()
-  holiday = current.getDay() == 0 || current.getDay() == 6
+  if current.getDay() == 0 || current.getDay() == 6
+    day = "holiday"
+  else
+    day = "weekday"
 
   num = 0
   str = ""
+  time_table = dia[day]
   while count > num
     break if hour > 23
-    if dia[dest][hour]?
-      list = dia[dest][hour]
+    if time_table[dest][hour]?
+      list = time_table[dest][hour]
       for time in list
         break if num >= count
         if time > min
@@ -52,10 +55,10 @@ nextBus = (dest, count, msg) ->
   str
 
 destAvailable = (dest) ->
-  dest == "kita" || dest == "gaku" || dest == "taka"
+  dest == "kita" || dest == "gaku" || dest == "taka" || dest == "tiku"
 
 availableDest = () ->
-  "kita : 学研北生駒\ngaku : 学園前\ntaka : 高の原"
+  "kita : 学研北生駒\ngaku : 学園前\ntaka : 高の原\ntiku : 地区センターから学園前"
 
 keysFromDestination = (dest) ->
   dict = {
