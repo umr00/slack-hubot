@@ -12,14 +12,18 @@
 #   hubot mustache me <url> - Adds a mustache to the specified URL.
 #   hubot mustache me <query> - Searches Google Images for the specified query and mustaches it.
 
+AutoDeleteMessage = require('./auto-delete-post')
+
 module.exports = (robot) ->
   robot.respond /(image|img)( me)? (.*)/i, (msg) ->
+    channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
     imageMe msg, msg.match[3], (url) ->
-      msg.send url
+      new AutoDeleteMessage(robot, channel).post_with_day("#{url}", new Date().getTime(), 1)
 
   robot.respond /animate( me)? (.*)/i, (msg) ->
+    channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
     imageMe msg, msg.match[2], true, (url) ->
-      msg.send url
+      new AutoDeleteMessage(robot, channel).post_with_day("#{url}", new Date().getTime(), 1)
 
   robot.respond /(?:mo?u)?sta(?:s|c)h(?:e|ify)?(?: me)? (.*)/i, (msg) ->
     mustacheBaseUrl = process.env.HUBOT_MUSTACHIFY_URL?.replace(/\/$/, '') or "http://mustachify.me"
