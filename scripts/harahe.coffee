@@ -18,5 +18,6 @@ module.exports = (robot) ->
         '餃子'
         'ラーメン'
         'からあげ'
+        '焼肉'
     ]
     robot.receive new TextMessage(msg.message.user, "#{botName} image #{words[Math.floor(Math.random() * 3)]}", "image")
