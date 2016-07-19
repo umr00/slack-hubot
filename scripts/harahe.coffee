@@ -20,4 +20,4 @@ module.exports = (robot) ->
         'からあげ'
         '焼肉'
     ]
-    robot.receive new TextMessage(msg.message.user, "#{botName} image #{words[Math.floor(Math.random() * 3)]}", "image")
+    robot.receive new TextMessage(msg.message.user, "#{botName} image #{words[Math.floor(Math.random() * words.length)]}", "image")
