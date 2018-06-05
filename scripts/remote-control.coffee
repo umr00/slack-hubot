@@ -12,7 +12,7 @@
 
 module.exports = (robot) ->
   robot.respond /say (.*)/, (msg) ->
-    unless msg.envelope.room == 'hubot-test'
-      return
+    #unless msg._channel.is_im
+    #  return
     robot.messageRoom 'general', "#{msg.match[1]}"
 
