@@ -6,7 +6,7 @@
   "description": "Hubot for SDLab",
   "dependencies": {
     "coffee-script": "~1.7.1",
-    "hubot": "^2.12.0",
+    "hubot": "3.0.0",
     "hubot-cron": "0.2.9",
     "hubot-diagnostics": "^1.0.0",
     "hubot-google-images": "^0.2.7",
