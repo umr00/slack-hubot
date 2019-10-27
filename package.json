@@ -1,9 +1,9 @@
 {
   "name": "slackbot",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
-  "author": "Kenji Fujiwara <kenji-f@is.naist.jp>",
-  "description": "Hubot for SDLab",
+  "author": "Kenji Fujiwara <niyaton@gmail.com>",
+  "description": "Hubot for sdlabl-graduates",
   "dependencies": {
     "coffee-script": "~1.7.1",
     "hubot": "3.1.1",
