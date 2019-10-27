@@ -6,24 +6,20 @@
   "description": "Hubot for SDLab",
   "dependencies": {
     "coffee-script": "~1.7.1",
-    "hubot": "^2.12.0",
+    "hubot": "3.0.0",
     "hubot-cron": "0.2.9",
-    "hubot-diagnostics": "0.0.1",
-    "hubot-google-images": "^0.1.4",
-    "hubot-google-translate": "^0.1.0",
-    "hubot-help": "^0.1.1",
-    "hubot-maps": "0.0.2",
+    "hubot-diagnostics": "^1.0.0",
+    "hubot-google-images": "^0.2.7",
+    "hubot-help": "^1.0.0",
     "hubot-plusplus": "^1.1.5",
     "hubot-pugme": "^0.1.0",
-    "hubot-redis-brain": "0.0.2",
-    "hubot-rules": "^0.1.0",
+    "hubot-redis-brain": "^1.0.0",
     "hubot-scripts": "^2.5.16",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.3.0",
-    "hubot-youtube": "^0.1.2",
     "validator": "^3.39.0"
   },
   "engines": {
-    "node": "4.x"
+    "node": "> 4.0.0"
   }
 }
