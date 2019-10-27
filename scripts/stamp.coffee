@@ -15,7 +15,7 @@
 helpers = require('coffee-script/lib/coffee-script/helpers')
 validator = require('validator')
 {StampBrain} = require('./image-brain')
-AutoDeleteMessage = require('./auto-delete-post')
+AutoDeleteMessage = require('../libs/auto-delete-post')
 
 module.exports = (robot) ->
   brain = new StampBrain(robot)
@@ -161,7 +161,7 @@ module.exports = (robot) ->
     dict = helpers.merge(dict, brainDict)
 
     help = createHelp(dict)
-    channel = robot.adapter.client.getChannelGroupOrDMByName(msg.envelope.room)?.id
+    channel = msg.envelope.room
     time = new Date().getTime()
 
     if message == "help"
