@@ -13,7 +13,7 @@
 #   sdbot add zoi <key> <value> - Add to zoi
 #   sdbot remove zoi <key> - Remove from zoi
 
-helpers = require('coffee-script/lib/coffee-script/helpers')
+helpers = require('coffeescript/lib/coffee-script/helpers')
 validator = require('validator')
 {ZoiBrain} = require('./image-brain')
 AutoDeleteMessage = require('../libs/auto-delete-post')

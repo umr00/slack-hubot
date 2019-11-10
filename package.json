@@ -5,7 +5,7 @@
   "author": "Kenji Fujiwara <niyaton@gmail.com>",
   "description": "Hubot for sdlabl-graduates",
   "dependencies": {
-    "coffee-script": "~1.7.1",
+    "coffeescript": "1.12.7",
     "hubot": "3.3.2",
     "hubot-diagnostics": "^1.0.0",
     "hubot-google-images": "^0.2.7",
@@ -16,7 +16,7 @@
     "hubot-scripts": "^2.5.16",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^4.7.1",
-    "validator": "^3.39.0"
+    "validator": "12.0.0"
   },
   "engines": {
     "node": "> 4.0.0"
