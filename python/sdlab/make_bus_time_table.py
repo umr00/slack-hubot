@@ -11,8 +11,10 @@ TIKU_CENTER = 631
 KITAIKOMA = 2610
 GAKUENMAE = 132
 
+
 def get_soup_from_url(url):
     return BeautifulSoup(urlopen(url).read())
+
 
 def detect_time_table_url(soup):
     base_url = 'http://jikoku.narakotsu.co.jp/form/asp/'
@@ -20,6 +22,7 @@ def detect_time_table_url(soup):
         if frame['name'] != 'main':
             continue
         return base_url + frame['src']
+
 
 def get_departure_times(tr):
     for td in tr.find_all('td'):
@@ -29,13 +32,15 @@ def get_departure_times(tr):
         for t in times:
             yield int(t)
 
+
 def parse_nara_kotsu_time_table(soup):
-    #soup = BeautifulSoup(html)
+    # soup = BeautifulSoup(html)
     result = {}
     for hour, tr in enumerate(soup.table.find_all('tr')[5:-2], start=5):
         result[hour] = get_departure_times(tr)
 
     return result
+
 
 def get_time_table_frame_url(day, from_id, to_id):
     query = [('dia', '0'),
@@ -49,9 +54,6 @@ def get_time_table_frame_url(day, from_id, to_id):
     base_url = 'http://jikoku.narakotsu.co.jp/form/asp/ejhr0070.asp?'
     return base_url + urlencode(query)
 
-
-
-
 #for h, ts in parse_nara_kotsu_time_table(open('main_utf8.html')).items():
 #    h = h % 24
 #    l = list(ts)
@@ -60,9 +62,8 @@ def get_time_table_frame_url(day, from_id, to_id):
 #        time_table[h].append(l)
 #    print(h, l)
 
+# detect_time_table_url(open('test_utf8.html'))
 
-
-#detect_time_table_url(open('test_utf8.html'))
 
 time_tables = {}
 

@@ -15,6 +15,7 @@ requirements = [
     'Click>=6.0',
     'redis',
     'python-dotenv',
+    'beautifulsoup4',
     ]
 
 setup_requirements = [ ]
