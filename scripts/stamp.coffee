@@ -12,7 +12,7 @@
 #   sdbot add stamp <key> <value> - Add to stamp
 #   sdbot remove stamp <key> - Remove from stamp
 
-helpers = require('coffee-script/lib/coffee-script/helpers')
+helpers = require('coffeescript/lib/coffee-script/helpers')
 validator = require('validator')
 {StampBrain} = require('./image-brain')
 AutoDeleteMessage = require('../libs/auto-delete-post')
