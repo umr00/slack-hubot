@@ -14,10 +14,8 @@ module.exports = (robot) ->
 				for message in value
 					message.iv ||= delete_interval
 					if current_time - key > message.iv
-						robot.adapter.client._apiCall 'chat.delete',
-							channel: message.ch
-							ts: message.ts
-						, (res) -> null
+						@robot.logger.debug 'remove message' + ' ' + message.ts + ' ' + message.ch
+						@robot.adapter.client.web.chat.delete message.ts, message.ch
 					else
 						messages.push(message)
 				if messages.length == 0
