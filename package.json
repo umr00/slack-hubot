@@ -1,24 +1,24 @@
 {
-  "name": "slackbot",
+  "name": "sdlab-graduates-bolt",
   "version": "0.0.1",
-  "private": true,
-  "author": "Kenji Fujiwara <niyaton@gmail.com>",
-  "description": "Hubot for sdlabl-graduates",
-  "dependencies": {
-    "coffeescript": "1.12.7",
-    "hubot": "3.3.2",
-    "hubot-diagnostics": "^1.0.0",
-    "hubot-google-images": "^0.2.7",
-    "hubot-help": "^1.0.0",
-    "hubot-plusplus": "^1.1.5",
-    "hubot-pugme": "^0.1.0",
-    "hubot-redis-brain": "^1.0.0",
-    "hubot-scripts": "^2.5.16",
-    "hubot-shipit": "^0.2.0",
-    "hubot-slack": "^4.7.1",
-    "validator": "12.0.0"
+  "description": "slack bot for sdlab-graduates powered by bolt",
+  "main": "app.js",
+  "author": "Kenji Fujiwara",
+  "license": "MIT",
+  "scripts": {
+    "start-with-env": "node -r dotenv/config app.js",
+    "build": "tsc",
+    "watch": "tsc --watch"
   },
-  "engines": {
-    "node": "> 4.0.0"
+  "devDependencies": {
+    "@types/ioredis": "^4.0.19",
+    "@types/validator": "10.11.3",
+    "dotenv": "^8.2.0",
+    "ioredis": "^4.14.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@slack/bolt": "^1.4.1",
+    "validator": "10.11.0"
   }
 }
