@@ -232,6 +232,7 @@ function addVoteHandler(app: App): void {
  */
 function addTopBottomHandler(app: App): void {
   app.event('app_mention', async ({event, say}) => {
+    // TODO support showing sparkline for top scores.
     const pattern = /(top|bottom) (\d+)/i;
     const match = event.text.match(pattern);
 
