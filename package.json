@@ -6,7 +6,7 @@
   "author": "Kenji Fujiwara",
   "license": "MIT",
   "scripts": {
-    "start-with-env": "node -r dotenv/config app.js",
+    "start-with-env": "node -r dotenv/config build/app.js",
     "build": "tsc",
     "watch": "tsc --watch"
   },
