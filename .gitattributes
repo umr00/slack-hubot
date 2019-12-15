@@ -1,0 +1,9 @@
+*	text
+*.bat	text eol=crlf
+*.ini	text
+*.json	text eol=lf
+*.lock	text eol=lf
+*.md	text eol=lf
+*.py	text eol=lf diff=python
+*.rst	text
+*.ts	text eol=lf
