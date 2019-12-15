@@ -10,6 +10,7 @@ tox = "*"
 coverage = "*"
 PyInstaller = "*"
 Sphinx = "*"
+sphinx_theme = "*"
 twine = "*"
 pylint = "*"
 
