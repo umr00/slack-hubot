@@ -12,6 +12,12 @@ interface UserInfoResult extends WebAPICallResult {
   }
 }
 
+const redisNameSpace = "plusplus";
+const scoreKey = [redisNameSpace, "score"].join(":");
+const reasonKey = [redisNameSpace, "score", "reason"].join(":");
+const lastKey = [redisNameSpace, "last"].join(":");
+const logKey = [redisNameSpace, "log"].join(":");
+
 const scoreKeyword = process.env.HUBOT_PLUSPLUS_KEYWORD || "score";
 const reasonsKeyword = process.env.HUBOT_PLUSPLUS_REASONS || "raisins";
 const reasonConjunctions = process.env.HUBOT_PLUSPLUS_CONJUNCTIONS || "for|because|cause|cuz|as";
@@ -25,8 +31,8 @@ class ScoreKeeper {
   }
 
   async incrementScore(user: string, fromUser: string, channel: string, reason: string, amount: number) {
-    let score = this.redis.zincrby("score", amount, user).then((_) => {
-      return this.redis.zscore("score", user)
+    let score = this.redis.zincrby(scoreKey, amount, user).then((_) => {
+      return this.redis.zscore(scoreKey, user)
         .then(s => {
           console.log(`saved ${s} to ${user}.`);
           return parseInt(s)
@@ -35,7 +41,7 @@ class ScoreKeeper {
 
     let reasonScore: Promise<number> | undefined = undefined;
     if (reason) {
-      let key = ["score", "reason", user].join(":");
+      let key = [reasonKey, user].join(":");
       reasonScore = this.redis.zincrby(key, amount, user)
         .then((_) => {
           return this.redis.zscore(key, user).then(s => parseInt(s));
@@ -48,16 +54,16 @@ class ScoreKeeper {
   eraseScore(user: string) {
     // FIXME current implementation just erase score.
     // TODO adding role or limitation for erase feature.
-    let key = ["score", "reason", user].join(":");
+    let key = [reasonKey, user].join(":");
     this.redis.del(key)
       .then(_ => console.log(`removed ${key}`));
-    key = "score";
+    key = scoreKey;
     this.redis.zrem(key, user)
       .then((_: any) => console.log(`removed ${user} of ${key}`));
   }
 
   last(channel: string): Promise<string | null>[] {
-    let key = ["last", channel].join(":");
+    let key = [lastKey, channel].join(":");
     let user = this.redis.hget(key, "user");
     let reason = this.redis.hget(key, "")
 
@@ -67,10 +73,10 @@ class ScoreKeeper {
   saveScoreLog(user: string, fromUser: string, channel: string, reason: string): void {
     // FIXME current implementation just concatate `fromUser` and `user` with ':' ...
     // but user should not contain ':' because it's ID of Slack User.
-    let key = ["log", fromUser, user].join(':');
+    let key = [logKey, fromUser, user].join(':');
     this.redis.lpush(key, new Date().getTime());
 
-    key = ["last", channel].join(":");
+    key = [lastKey, channel].join(":");
     this.redis.hset(key, "user", user);
     if (reason) {
       this.redis.hset(key, "reason", reason);
@@ -81,7 +87,7 @@ class ScoreKeeper {
     // FIXME use zscore
     let result: number | undefined = undefined;
     console.log("getting redis data...");
-    let reply = await this.redis.zscore("score", user);
+    let reply = await this.redis.zscore(scoreKey, user);
     if (reply) {
       result = Number(reply);
     }
@@ -118,7 +124,7 @@ class ScoreKeeper {
   }
 
   async isSpam(fromUser: string, target: string): Promise<boolean> {
-    let key = ["log", fromUser, target].join(":");
+    let key = [logKey, fromUser, target].join(":");
     return this.redis.lindex(key, 0)
       .then((timestamp) => {
         if (timestamp == null) {
@@ -142,10 +148,10 @@ class ScoreKeeper {
     };
 
     if (top) {
-      return this.redis.zrevrange("score", 0, amount - 1, "WITHSCORES")
+      return this.redis.zrevrange(scoreKey, 0, amount - 1, "WITHSCORES")
         .then(cb);
     } else {
-      return this.redis.zrange("score", 0, amount - 1, "WITHSCORES")
+      return this.redis.zrange(scoreKey, 0, amount - 1, "WITHSCORES")
         .then(cb);
     }
   }
