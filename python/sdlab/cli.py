@@ -9,7 +9,7 @@ import click
 def dump_brain():
     import json
     from sdlab.brain import load_brain
-    
+
     brain = load_brain()
     click.echo(json.dumps(brain, indent=2, ensure_ascii=False))
 
@@ -31,6 +31,15 @@ def clean_brain():
     clear_brain_trash()
     pass
 
+
+@click.command()
+@click.argument('brain_dump_file', type=click.Path(exists=True))
+def convert_plusplus_brain(brain_dump_file):
+    import json
+    from sdlab.plusplus import convert_hubot_brain_to_bolt_redis
+    with open(brain_dump_file) as f:
+        brain = json.load(f)
+        convert_hubot_brain_to_bolt_redis(brain)
 
 @click.command()
 def main(args=None):

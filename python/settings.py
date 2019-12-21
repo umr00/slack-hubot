@@ -9,3 +9,5 @@ load_dotenv(dotenv_path)
 
 PWD = os.environ.get("PASSWORD")
 REDISCLOUD_URL = os.environ.get("REDISCLOUD_URL")
+REDIS_URL = os.getenv('REDIS_URL', default='redis://localhost:6379')
+SLACK_API_TOKEN = os.getenv('SLACK_BOT_TOKEN', '')

@@ -16,6 +16,7 @@ requirements = [
     'redis',
     'python-dotenv',
     'beautifulsoup4',
+    'slackclient',
     ]
 
 setup_requirements = [ ]
@@ -43,7 +44,8 @@ setup(
             'sdlab-graduates=sdlab.cli:main',
             'dump-brain=sdlab.cli:dump_brain',
             'restore-brain=sdlab.cli:restore_brain',
-            'clean-brain=sdlab.cli:clean_brain'
+            'clean-brain=sdlab.cli:clean_brain',
+            'convert-plusplus-brain=sdlab.cli:convert_plusplus_brain'
         ],
     },
     install_requires=requirements,
