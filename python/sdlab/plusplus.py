@@ -24,9 +24,9 @@ def pretty_dump(data):
 
 def convert_hubot_brain_to_bolt_redis(brain):
     plusplus_data = brain['plusPlus']
-    # convert_score(plusplus_data)
+    convert_score(plusplus_data)
     # convert_score_log(plusplus_data)
-    convert_reasons(plusplus_data)
+    # convert_reasons(plusplus_data)
 
 
 def convert_score_log(plusplus_data):
