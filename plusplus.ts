@@ -229,7 +229,6 @@ function addVoteHandler(app: App): void {
     let pointStr = score == 1 ? "point" : "points";
     say(`${name} has ${score} ${pointStr}${reasonStr}`);
 
-    say(message.text || "");
     console.log([_, name, operator, reason].join(','))
   });
 }
