@@ -42,6 +42,7 @@ class ScoreKeeper {
     let reasonScore: Promise<number> | undefined = undefined;
     if (reason) {
       let key = [reasonKey, user].join(":");
+      // TODO use
       reasonScore = this.redis.zincrby(key, amount, user)
         .then((_) => {
           return this.redis.zscore(key, user).then(s => parseInt(s));
@@ -65,7 +66,7 @@ class ScoreKeeper {
   last(channel: string): Promise<string | null>[] {
     let key = [lastKey, channel].join(":");
     let user = this.redis.hget(key, "user");
-    let reason = this.redis.hget(key, "")
+    let reason = this.redis.hget(key, "");
 
     return [user, reason];
   }
@@ -73,6 +74,7 @@ class ScoreKeeper {
   saveScoreLog(user: string, fromUser: string, channel: string, reason: string): void {
     // FIXME current implementation just concatate `fromUser` and `user` with ':' ...
     // but user should not contain ':' because it's ID of Slack User.
+    // FIXME need to record increment or decrement.
     let key = [logKey, fromUser, user].join(':');
     this.redis.lpush(key, new Date().getTime());
 
