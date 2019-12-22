@@ -1,5 +1,6 @@
 import { App } from '@slack/bolt';
 import { addPlusPlusHandler } from './plusplus';
+import { addSayHandler} from "./say";
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
@@ -19,6 +20,8 @@ function add_message(app: App) {
 
 add_message(app);
 addPlusPlusHandler(app);
+addSayHandler(app);
+
 
 app.event('app_mention', ({event, say}) => {
   let pattern = /ping$/i;
