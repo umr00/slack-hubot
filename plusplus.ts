@@ -21,13 +21,25 @@ const logKey = [redisNameSpace, "log"].join(":");
 const scoreKeyword = process.env.HUBOT_PLUSPLUS_KEYWORD || "score";
 const reasonsKeyword = process.env.HUBOT_PLUSPLUS_REASONS || "raisins";
 const reasonConjunctions = process.env.HUBOT_PLUSPLUS_CONJUNCTIONS || "for|because|cause|cuz|as";
-const REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1";
+const REDIS_URL = process.env.REDIS_TLS_URL || "redis://127.0.0.1";
 
 class ScoreKeeper {
-  redis = new Redis(REDIS_URL);
-
+  redis;
   constructor() {
-
+    const redis_uri = new URL(REDIS_URL);
+    if(REDIS_URL.includes("rediss://")){
+      this.redis = new Redis({
+        port: Number(redis_uri.port),
+        host: redis_uri.hostname,
+        password: redis_uri.password,
+        db: 0,
+        tls: {
+          rejectUnauthorized: false,
+        },
+      })
+    } else {
+      this.redis = new Redis(REDIS_URL);
+    }
   }
 
   async incrementScore(user: string, fromUser: string, channel: string, reason: string, amount: number) {
