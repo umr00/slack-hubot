@@ -10,12 +10,14 @@ const app = new App({
 
 
 function add_message(app: App) {
-  app.message('hello', ({ message, say}) => {
-    say({
-      "text": `Hey there <@${message.user}>!`
-    });
-    say(`${message.ts}`);
-    say(`${message.channel}`);
+  app.message('hello', async ({ message, say}) => {
+    if(message.subtype === undefined){
+      await say({
+        "text": `Hey there <@${message.user}>!`
+      });
+      await say(`${message.ts}`);
+      await say(`${message.channel}`);
+    }
   });
 }
 
@@ -25,7 +27,7 @@ addSayHandler(app);
 addImageHandler(app);
 
 
-app.event('app_mention', ({event, say}) => {
+app.event('app_mention', async ({event, say}) => {
   let pattern = /ping$/i;
   if(event.text.toLowerCase().match(pattern)){
     say("PONG");
@@ -33,7 +35,7 @@ app.event('app_mention', ({event, say}) => {
 });
 
 (async () => {
-    await app.start(process.env.PORT || 3000);
+    await app.start(Number(process.env.PORT) || 3000);
 
     console.log('⚡️ Bolt app is running!');
 })();
