@@ -11,6 +11,6 @@ export function addSayHandler(app: App): void {
       channel: "#general",
       text: msg
     });
-    say("「" + msg + "」を #general で発言しました！");
+    await say("「" + msg + "」を #general で発言しました！");
   });
 }

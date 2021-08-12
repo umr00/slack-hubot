@@ -187,7 +187,15 @@ function addVoteHandler(app: App): void {
     let [_, name, operator, reason]: string[] = context.matches;
     name = name || "";
 
+    if(message.subtype !== undefined)
+      return;
+
     let fromUser = message.user;
+    if(fromUser === undefined){
+      console.error("user of message is undefined");
+      return;
+    }
+
     let channel = message.channel;
 
     if (name) {
@@ -206,7 +214,7 @@ function addVoteHandler(app: App): void {
       let [lastUser, _] = scoreKeeper.last(channel);
       name = await lastUser || "";
       if (name == "") {
-        say("cannot score to empty target.");
+        await say("cannot score to empty target.");
         console.debug("cannot score to empty target.");
         console.debug(`matched message: ${message}`);
         return;
@@ -227,7 +235,7 @@ function addVoteHandler(app: App): void {
     }
 
     let pointStr = score == 1 ? "point" : "points";
-    say(`${name} has ${score} ${pointStr}${reasonStr}`);
+    await say(`${name} has ${score} ${pointStr}${reasonStr}`);
 
     console.log([_, name, operator, reason].join(','))
   });
@@ -261,7 +269,7 @@ function addTopBottomHandler(app: App): void {
       messages.push(`${i + 1}. ${topOrBottoms[i]["name"]} : ${topOrBottoms[i]["score"]}`);
     }
 
-    say(messages.join("\n"));
+    await say(messages.join("\n"));
   });
 }
 
@@ -282,7 +290,7 @@ function addEraseHandler(app: App): void {
     }
     console.log(match);
     await scoreKeeper.eraseScore(match[1]);
-    say(`removed all scores of ${match[1]}`);
+    await say(`removed all scores of ${match[1]}`);
     //let name = match[1];
 
   });
@@ -309,9 +317,9 @@ function addShowScoreHandler(app: App): void {
     let score = await scoreKeeper.getUserScore(name);
     if(score) {
       let pointStr = score == 1 ? "point" : "points";
-      say(`${name} has ${score} ${pointStr}.`);
+      await say(`${name} has ${score} ${pointStr}.`);
     } else {
-      say(`${name} has no points.`);
+      await say(`${name} has no points.`);
     }
 
   })

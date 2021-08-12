@@ -15,9 +15,9 @@ export function addImageHandler(app: App): void {
 
     let link = await getImageLink(query, command == 'animate');
     if(link){
-      say(link);
+      await say(link);
     } else {
-      say(`Oops. I had trouble searching '${query}'. Try later.`);
+      await say(`Oops. I had trouble searching '${query}'. Try later.`);
     }
   });
 }
