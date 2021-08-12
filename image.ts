@@ -10,10 +10,10 @@ export function addImageHandler(app: App): void {
     return;
   }
 
-  app.message(/^(image|img)( me)? (.*)/i, async({context, message, say}) => {
+  app.message(/^(animate|image|img)( me)? (.*)/i, async({context, message, say}) => {
     let [all, command, me, query]: string[] = context.matches;
 
-    let link = await getImageLink(query, false);
+    let link = await getImageLink(query, command == 'animate');
     if(link){
       say(link);
     } else {
@@ -26,15 +26,23 @@ async function getImageLink(query: string, animated: boolean) : Promise<string |
   const url = 'https://www.googleapis.com/customsearch/v1';
 
   try{
+    let p: any = {
+      q: query,
+      searchType: 'image',
+      safe: 'high',
+      fields: 'items(link)',
+      cx: googleCseId,
+      key: googleApiKey
+    };
+
+    if(animated) {
+      p.fileType = 'gif';
+      p.hq = 'animated';
+      p.tbs = 'itp:animated';
+    }
+
     const res = await axios.get(url, {
-      params: {
-        q: query,
-        searchType: 'image',
-        safe: 'high',
-        fields: 'items(link)',
-        cx: googleCseId,
-        key: googleApiKey
-      }
+      params: p
     });
     const item = res.data.items[Math.floor(Math.random() * res.data.items.length)];
     return item.link;
