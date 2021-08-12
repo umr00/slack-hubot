@@ -34,6 +34,11 @@ app.event('app_mention', async ({event, say}) => {
   }
 });
 
+app.message(/^zoi (.*)/i, async ({context, say}) => {
+  let [_, query] = context.matches;
+  await say(`${query}はないぞい`);
+});
+
 (async () => {
     await app.start(Number(process.env.PORT) || 3000);
 
