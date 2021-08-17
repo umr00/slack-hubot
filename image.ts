@@ -20,6 +20,26 @@ export function addImageHandler(app: App): void {
       await say(`Oops. I had trouble searching '${query}'. Try later.`);
     }
   });
+
+  app.message(/はらへ/i, async({context, message, say}) => {
+    let foods: Array<string> = [
+      "ラーメン",
+      "焼肉",
+      "餃子",
+      "唐揚げ",
+      "焼き鳥",
+      "串カツ",
+      "粉もの",
+      "スイーツ"
+    ];
+    let query = foods[Math.floor(Math.random() * foods.length)] 
+    let link = await getImageLink(query, false);
+    if(link){
+      await say(link);
+    } else {
+      await say(`Oops. I had trouble searching '${query}'. Try later.`);
+    }
+  });
 }
 
 async function getImageLink(query: string, animated: boolean) : Promise<string | null> {
